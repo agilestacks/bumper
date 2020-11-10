@@ -1,6 +1,6 @@
 ## Kubernetes cluster cost metrics
 
-Bumper is a pragmatic HTTP API to retrieve [Korral] Prometheus metrics and to proxy [Fiber] [Korral](https://github.com/agilestacks/fiber/blob/master/samples/korral.yaml) custom resources.
+Bumper is a pragmatic HTTP [API] to retrieve [Korral]'s Prometheus metrics and to proxy [Fiber]'s [Korral](https://github.com/agilestacks/fiber/blob/master/samples/korral.yaml) custom resources.
 
 ### API
 
@@ -44,6 +44,7 @@ Either `token` or `clientCert` / `clientKey` pair must be specified with permiss
 `GET /cluster/<uuid>/metrics?[options]` returns cluster cost and essential capacity metrics in Prometheus format. UI uses metrics to slice cost by namespace, pod, application, team, etc. Requests sent to `metrics` are tailored to use case and are transformed into Prometheus queries.
 
 
+[API]: https://agilestacks.github.io/bumper/API.html
 [Prometheus]: https://prometheus.io/
 [Korral]: https://github.com/agilestacks/korral
 [Fiber]: https://github.com/agilestacks/fiber

@@ -1,0 +1,45 @@
+{
+  "name": "bumper",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "lint": "eslint server.js src/ test/",
+    "jest": "jest",
+    "test": "npm run jest",
+    "debug": "node --inspect server.js",
+    "debug:brk": "node --inspect-brk server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=12.18",
+    "npm": ">=6.13"
+  },
+  "dependencies": {
+    "ajv": "^6.12.0",
+    "ajv-errors": "^1.0.1",
+    "axios": "^0.21.0",
+    "js-yaml": "^3.14.0",
+    "kcors": "^2.2.2",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.4.0",
+    "lodash": "^4.17.20",
+    "triple-beam": "^1.3.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

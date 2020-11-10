@@ -1,5 +1,5 @@
-Bumper is a pragmatic HTTP API to retrieve Korral Prometheus metrics
-and to proxy Fiber Cluster custom resources.
+Bumper is a pragmatic HTTP API to retrieve Korral's Prometheus metrics
+and to proxy Fiber's Korral custom resources.
 Copyright 2020 Agile Stacks, Inc.
 Contact us at support@agilestacks.com
 

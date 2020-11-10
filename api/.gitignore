@@ -1,0 +1,4 @@
+node_modules/
+templates/*.yaml
+templates/*.json
+skaffold.yaml

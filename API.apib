@@ -1,0 +1,246 @@
+FORMAT: 1A
+HOST: http://kushion.agilestacks.com/api/v1
+
+# Bumper API
+
+Bumper is a pragmatic HTTP API to retrieve [Korral](https://github.com/agilestacks/korral)'s Prometheus
+metrics and to proxy [Fiber](https://github.com/agilestacks/fiber)'s
+[Korral](https://github.com/agilestacks/fiber/blob/master/samples/korral.yaml) custom resources.
+
+## Clusters [/clusters/{uid}]
+
+A cluster is Korral custom resource object for Fiber to install Korral on target cluster and to reconfigure Prometheus.
+
++ Parameters
+    + uid: `eda4ac2b-fc4e-4ca5-ac52-1fb709247040` (string) - UUID of the cluster
+
+
+### Add cluster [POST /clusters]
+
+Currently 404 is returned if `X-API-Secret` is not valid.
+
++ Request (application/json)
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
+    + Body
+
+            {
+                "meta": {
+                    "name": "My Cluster",
+                    "domain": "test.bubble.superhub.io",
+                    "description": "optional"
+                },
+                "kubernetes": {
+                    "api": {
+                        "endpoint": "https://api.test.bubble.superhub.io/",
+                        "caCert": "-----BEGIN CERTIFICATE...",
+                        "token": "<bearer token>",
+                        "clientCert": "-----BEGIN CERTIFICATE...",
+                        "clientKey": "-----BEGIN RSA PRIVATE KEY..."
+                    }
+                }
+            }
+
++ Response 201 (application/json; charset=utf-8)
+
+    + Body
+
+            {
+                "uid": "eda4ac2b-fc4e-4ca5-ac52-1fb709247040",
+                "meta": {},
+                "kubernetes": {},
+            }
+
++ Response 403
+
++ Response 404
+
++ Response 400 (application/json; charset=utf-8)
+
+            "errors": [
+                    {
+                        "type": "badRequest",
+                        "detail": "Error parse JSON input",
+                        "meta": {
+                            "errors": {
+                                "type": "badRequest",
+                                "detail": "Error parse JSON input",
+                                "meta": {
+                                    "stack":"Error: Error parse JSON input...js:76:19)"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+
++ Response 500
+
+
+### Get cluster [GET]
+
++ Request
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+
+            {
+                "meta": {
+                    "name": "My Cluster",
+                    "domain": "test.bubble.superhub.io",
+                    "description": "optional"
+                },
+                "kubernetes": {
+                    "api": {
+                        "endpoint": "https://api.test.bubble.superhub.io/"
+                    }
+                },
+                "status": {
+                    "status": "status from the Fiber operator"
+                }
+            }
+
++ Response 403
+
++ Response 404
+
++ Response 500
+
+
+### Change cluster [PATCH]
+
++ Request (application/json)
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
+    + Body
+
+            {
+                "meta": {
+                    "name": "My Cluster",
+                    "domain": "test.bubble.superhub.io",
+                    "description": "optional"
+                },
+                "kubernetes": {
+                    "api": {
+                        "endpoint": "https://api.test.bubble.superhub.io/",
+                        "caCert": "-----BEGIN CERTIFICATE...",
+                        "token": "<bearer token>",
+                        "clientCert": "-----BEGIN CERTIFICATE...",
+                        "clientKey": "-----BEGIN RSA PRIVATE KEY..."
+                    }
+                }
+            }
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+
+            {
+                "meta": {
+                    "name": "My Cluster",
+                    "domain": "test.bubble.superhub.io",
+                    "description": "optional"
+                },
+                "kubernetes": {
+                    "api": {
+                        "endpoint": "https://api.test.bubble.superhub.io/"
+                    }
+                },
+                "status": {
+                    "status": "status from the Fiber operator"
+                }
+            }
+
++ Response 403
+
++ Response 404
+
++ Response 500
+
+
+### Get cluster metrics [GET /cluster/{uid}/metrics]
+
++ Parameters
+    + uid: `eda4ac2b-fc4e-4ca5-ac52-1fb709247040` (string) - UUID of the cluster
+
++ Request
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+
+            {
+            }
+
++ Response 403
+
++ Response 404
+
++ Response 500
+
+
+### List clusters [GET /clusters]
+
++ Request
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+
+            [{
+                "meta": {
+                    "name": "My Cluster",
+                    "domain": "test.bubble.superhub.io",
+                    "description": "optional"
+                },
+                "kubernetes": {
+                    "api": {
+                        "endpoint": "https://api.test.bubble.superhub.io/"
+                    }
+                },
+                "status": {
+                    "status": "status from the Fiber operator"
+                }
+            }]
+
++ Response 403
+
++ Response 404
+
++ Response 500
+
+
+### Delete cluster [DELETE]
+
++ Request
+
+    + Headers
+
+            X-API-Secret: pre-shared-key
+
++ Response 204
+
++ Response 403
+
++ Response 404
+
++ Response 500
